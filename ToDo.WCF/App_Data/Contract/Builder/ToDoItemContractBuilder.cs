@@ -18,6 +18,8 @@ namespace ToDo.WCF.Contract.Builder
             toDoItemContract.Title = toDoItemEntity.Title;
             toDoItemContract.Description = toDoItemEntity.Description;
             toDoItemContract.Complete = toDoItemEntity.Complete;
+            toDoItemContract.ParentId = toDoItemEntity.ParentId;
+            toDoItemContract.OrderId = toDoItemEntity.OrderId;
 
             return toDoItemContract;
         }
