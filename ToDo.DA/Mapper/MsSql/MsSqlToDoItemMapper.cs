@@ -107,13 +107,11 @@ namespace ToDo.DA.Mapper.MsSql
 
         public bool Update(IToDoItem toDoItem)
         {
-//            string sql = @" UPDATE ToDoItems 
-//                            SET title = @title
-//                            , description = @description
-//                            , complete = @complete
-//                            WHERE id = @ids";
-
-            string sql = String.Format("UPDATE [todo_test].[dbo].[ToDoItems] set description = '{0}', Title = '{1}' WHERE ID = '{2}'", toDoItem.Description, toDoItem.Title, toDoItem.Id);
+            string sql = @" UPDATE ToDoItems 
+                            SET title = @title
+                            , description = @description
+                            , complete = @complete
+                            WHERE id = @ids";
 
             // access the database and retrieve data
             using (IDbConnection conn = GetConnection())
@@ -121,15 +119,15 @@ namespace ToDo.DA.Mapper.MsSql
                 IDbCommand command = conn.CreateCommand();
                 command.CommandText = sql;
 
-                //IDbDataParameter title = new SqlParameter("@title", toDoItem.Title);
-                //IDbDataParameter description = new SqlParameter("@description", toDoItem.Description);
-                //IDbDataParameter complete = new SqlParameter("@complete", toDoItem.Complete);
-                //IDbDataParameter id = new SqlParameter("@id", toDoItem.Id);
+                IDbDataParameter title = new SqlParameter("@title", toDoItem.Title);
+                IDbDataParameter description = new SqlParameter("@description", toDoItem.Description);
+                IDbDataParameter complete = new SqlParameter("@complete", toDoItem.Complete);
+                IDbDataParameter id = new SqlParameter("@id", toDoItem.Id);
 
-                //command.Parameters.Add(title);
-                //command.Parameters.Add(description);
-                //command.Parameters.Add(complete);
-                //command.Parameters.Add(id);
+                command.Parameters.Add(title);
+                command.Parameters.Add(description);
+                command.Parameters.Add(complete);
+                command.Parameters.Add(id);
 
                 try
                 {
