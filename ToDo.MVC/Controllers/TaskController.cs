@@ -56,7 +56,8 @@ namespace ToDo.MVC.Controllers
             }
             catch
             {
-                return View();
+                //Was returing View, but Create has no view so we return the Index Page.
+                return Index();
             }
         }
         

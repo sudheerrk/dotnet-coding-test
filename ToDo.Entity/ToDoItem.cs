@@ -11,8 +11,8 @@ namespace ToDo.Entity
         private string _title;
         private string _description;
         private bool _complete;
-
-        
+        private string _relatedId;
+        private Dictionary<string, string> DoRelatedItems { get; set; }
 
         public string Id
         {
@@ -33,6 +33,19 @@ namespace ToDo.Entity
         }
 
         public bool Complete
+        {
+            get { return _complete; }
+            set { _complete = value; }
+        }
+
+
+        public string RelatedId
+        {
+            get { return _complete; }
+            set { _complete = value; }
+        }
+
+        public Dictionary<string, string> DoRelatedItems
         {
             get { return _complete; }
             set { _complete = value; }

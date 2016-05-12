@@ -49,7 +49,7 @@ namespace ToDo.DA.Mapper.MsSql
                             item.Title = reader.GetString(reader.GetOrdinal("title"));
                             item.Description = reader.GetString(reader.GetOrdinal("description"));
                             item.Complete = reader.GetBoolean(reader.GetOrdinal("complete"));
-
+                            item.DoRelatedItems.Add(reader.GetGuid(reader.GetOrdinal("id")).ToString(), reader.GetString(reader.GetOrdinal("title")));
                             items.Add(item);
                         }
                     }
@@ -79,10 +79,12 @@ namespace ToDo.DA.Mapper.MsSql
 
                 IDbDataParameter title = new SqlParameter("@title", toDoItem.Title);
                 IDbDataParameter description = new SqlParameter("@description", toDoItem.Description);
+                IDbDataParameter relatedId = new SqlParameter("@relatedId", toDoItem.RelatedId);
 
                 command.Parameters.Add(title);
                 command.Parameters.Add(description);
-
+                command.Parameters.Add(relatedId);
+                
                 try
                 {
                     conn.Open();
@@ -111,7 +113,8 @@ namespace ToDo.DA.Mapper.MsSql
                             SET title = @title
                             , description = @description
                             , complete = @complete
-                            WHERE id = @ids";
+                            , relatedId = @relatedId
+                            WHERE id = @id";
 
             // access the database and retrieve data
             using (IDbConnection conn = GetConnection())
@@ -123,11 +126,13 @@ namespace ToDo.DA.Mapper.MsSql
                 IDbDataParameter description = new SqlParameter("@description", toDoItem.Description);
                 IDbDataParameter complete = new SqlParameter("@complete", toDoItem.Complete);
                 IDbDataParameter id = new SqlParameter("@id", toDoItem.Id);
+                IDbDataParameter relatedId = new SqlParameter("@relatedId", toDoItem.RelatedId);
 
                 command.Parameters.Add(title);
                 command.Parameters.Add(description);
                 command.Parameters.Add(complete);
                 command.Parameters.Add(id);
+                command.Parameters.Add(relatedId);
 
                 try
                 {

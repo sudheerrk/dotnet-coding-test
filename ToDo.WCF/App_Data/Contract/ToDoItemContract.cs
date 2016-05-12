@@ -24,5 +24,10 @@ namespace ToDo.WCF.Contract
         [DataMember]
         public bool Complete
         { get; set; }
+
+        [DataMember]
+        public Dictionary<string, string> DoRelatedItems
+        { get; set; }
+
     }
 }
