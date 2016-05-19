@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ToDo.MVC.Controllers
@@ -22,10 +21,14 @@ namespace ToDo.MVC.Controllers
         public ActionResult Details(string id)
         {
             ToDoService.ToDoServiceClient service = new ToDoService.ToDoServiceClient();
-
             List<ToDoService.ToDoItemContract> items = service.GetToDoItems("").ToList();
+            ToDoService.ToDoItemContract model = items.Where(x => x.Id == id).FirstOrDefault();
 
-            return View(items.Where(x => x.Id == id).FirstOrDefault());
+            //only set in edit mode
+            if (id!=null)
+                model.RelatedItems = items.Where(x => x.Id != id).ToArray();
+
+            return View(model);
         }
 
         //
@@ -73,21 +76,33 @@ namespace ToDo.MVC.Controllers
         // POST: /Task/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(string id, FormCollection collection)
+        public ActionResult Edit(FormCollection collection)
         {
             try
             {
+                string relatedId = string.Empty;
                 ToDoService.ToDoServiceClient service = new ToDoService.ToDoServiceClient();
 
                 ToDoService.ToDoItemContract task = new ToDoService.ToDoItemContract();
-                task.Id = id;
+                task.Id = collection.Get("Id");
                 task.Title = collection.Get("Title");
                 task.Description = collection.Get("Description");
 
-                // MVC sends a checkbox value grouped with a hidden field, take the first result
+                // MVC sends a checkbox and RelatedId value grouped with a hidden field.
                 string complete = collection.Get("Complete").Split(',')[0];
-
                 task.Complete = Convert.ToBoolean(complete);
+
+                //take the second result
+                if (collection.Get("RelatedId").Contains(","))
+                {
+                    relatedId = collection.Get("RelatedId").Split(',')[1];
+                    
+                }
+                else
+                {
+                    relatedId = collection.Get("RelatedId");
+                }
+                task.RelatedId = relatedId;
 
                 service.SaveToDoItem(task);
  

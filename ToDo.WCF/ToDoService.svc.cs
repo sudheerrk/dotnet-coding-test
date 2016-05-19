@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
 using ToDo.Core.Service.Factory;
 using ToDo.Core.Service;
 using ToDo.Entity;
@@ -24,7 +19,7 @@ namespace ToDo.WCF
             ToDoItemService = toDoServiceFactory.CreateInstance();
         }
 
-        public IEnumerable<Contract.ToDoItemContract> GetToDoItems(string idFilter)
+        public IList<Contract.ToDoItemContract> GetToDoItems(string idFilter)
         {
             ToDoItemContractBuilder builder = new ToDoItemContractBuilder();
 

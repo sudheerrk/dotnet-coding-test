@@ -1,0 +1,43 @@
+﻿@model ToDo.MVC.ToDoService.ToDoItemContract
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+@using (Html.BeginForm("Edit", "Task"))
+{
+    <div class="col-md-6" style="width: 100%;">
+        @*Did not get time to create template for positioning controls*@
+        @*@Html.EditorFor(m => m)*@
+        @Html.HiddenFor(x => x.Id)
+        <table>
+            <tr>
+                <td>@Html.LabelFor(x => x.Id)</td>
+                <td>@Html.DisplayFor(x => x.Id)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.Complete)</td>
+                <td>@Html.CheckBoxFor(x => x.Complete)</td>
+            </tr>                
+            <tr>
+                <td>@Html.LabelFor(x => x.Title)</td>
+                <td>@Html.TextBoxFor(x => x.Title)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.Description)</td>
+                <td>@Html.TextBoxFor(x => x.Description)</td>
+            </tr>
+
+            @*Make sure we have related items to display*@
+            @if (Model.RelatedItems != null)
+            {
+                <tr>
+                    <td>@Html.Label("Related Items")</td>
+                    <td>@Html.DropDownListFor(x => x.RelatedId, new SelectList(Model.RelatedItems, "Id", "Title"), "Please Select")</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <br /><br />
+    <button type="submit" value="Save" title="Save" class="btn btn-primary btn-sm">Save</button>
+}

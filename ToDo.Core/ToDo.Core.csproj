@@ -46,8 +46,12 @@
     <Compile Include="Service\ToDoItemService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ToDo.BusinessTier\ToDo.BusinessTier.csproj">
+      <Project>{2d48f787-e191-40ea-b801-11ded5d9c54b}</Project>
+      <Name>ToDo.BusinessTier</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ToDo.DA\ToDo.DA.csproj">
-      <Project>{AB4F2B7B-76C2-47AA-8179-D7F9875087CD}</Project>
+      <Project>{ab4f2b7b-76c2-47aa-8179-d7f9875087cd}</Project>
       <Name>ToDo.DA</Name>
     </ProjectReference>
     <ProjectReference Include="..\ToDo.Entity\ToDo.Entity.csproj">

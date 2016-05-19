@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://localhost:13404/ToDoService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:13404/ToDoService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:13404/ToDoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ToDo.WCF.Contract" />
+      <xsd:import schemaLocation="http://localhost:13404/ToDoService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IToDoService_GetToDoItems_InputMessage">
@@ -12,6 +13,12 @@
   </wsdl:message>
   <wsdl:message name="IToDoService_GetToDoItems_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetToDoItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IToDoService_GetRelatedItems_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelatedItems" />
+  </wsdl:message>
+  <wsdl:message name="IToDoService_GetRelatedItems_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelatedItemsResponse" />
   </wsdl:message>
   <wsdl:message name="IToDoService_SaveToDoItem_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveToDoItem" />
@@ -24,6 +31,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IToDoService/GetToDoItems" message="tns:IToDoService_GetToDoItems_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IToDoService/GetToDoItemsResponse" message="tns:IToDoService_GetToDoItems_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetRelatedItems">
+      <wsdl:input wsaw:Action="http://tempuri.org/IToDoService/GetRelatedItems" message="tns:IToDoService_GetRelatedItems_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IToDoService/GetRelatedItemsResponse" message="tns:IToDoService_GetRelatedItems_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SaveToDoItem">
       <wsdl:input wsaw:Action="http://tempuri.org/IToDoService/SaveToDoItem" message="tns:IToDoService_SaveToDoItem_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IToDoService/SaveToDoItemResponse" message="tns:IToDoService_SaveToDoItem_OutputMessage" />
@@ -33,6 +44,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetToDoItems">
       <soap:operation soapAction="http://tempuri.org/IToDoService/GetToDoItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelatedItems">
+      <soap:operation soapAction="http://tempuri.org/IToDoService/GetRelatedItems" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
