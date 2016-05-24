@@ -5,7 +5,7 @@ to use a different color start by replacing all instances of
 ----------------------------------------------------------*/
 body
 {
-    background-color: #5c87b2;
+    background-color: white;
     font-size: .75em;
     font-family: Verdana, Helvetica, Sans-Serif;
     margin: 0;
@@ -127,6 +127,10 @@ page width. Or, you can specify an exact pixel width. */
     font-size: .9em;
 }
 
+.sitelogo
+{
+ width: 200px;
+}
 /* TAB MENU   
 ----------------------------------------------------------*/
 ul#menu
@@ -341,4 +345,10 @@ div#title
 .tri-state
 {
     width: 6em;
+}
+
+.editor-label > label
+{
+    float: left;
+    width: 150px;
 }

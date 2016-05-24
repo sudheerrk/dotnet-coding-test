@@ -6,13 +6,10 @@ using System.Web.Mvc;
 
 namespace ToDo.MVC.Controllers
 {
-    [HandleError]
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
-
             ToDoService.ToDoServiceClient service = new ToDoService.ToDoServiceClient();
 
             List<ToDoService.ToDoItemContract> tasks = new List<ToDoService.ToDoItemContract>();
@@ -25,6 +22,15 @@ namespace ToDo.MVC.Controllers
 
         public ActionResult About()
         {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
             return View();
         }
     }

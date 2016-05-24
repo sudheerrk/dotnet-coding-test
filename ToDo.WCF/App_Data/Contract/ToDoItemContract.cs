@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using ToDo.BusinessTier.BusinessTier.Abstract;
 
 namespace ToDo.WCF.Contract
 {
@@ -26,8 +24,11 @@ namespace ToDo.WCF.Contract
         { get; set; }
 
         [DataMember]
-        public Dictionary<string, string> DoRelatedItems
+        public string RelatedId
         { get; set; }
 
+        [DataMember]
+        public List<IRelatedItem> RelatedItems
+        { get; set; }
     }
 }

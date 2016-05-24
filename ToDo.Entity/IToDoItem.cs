@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ToDo.BusinessTier.BusinessTier.Abstract;
+
 namespace ToDo.Entity
 {
     public interface IToDoItem
@@ -9,6 +10,6 @@ namespace ToDo.Entity
         string Id { get; set; }
         string Title { get; set; }
         string RelatedId { get; set; }
-        Dictionary<string, string> RelatedItems { get; set; }
+        List<IRelatedItem> RelatedItems { get; set; }
     }
 }

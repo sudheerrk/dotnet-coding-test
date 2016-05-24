@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Tasks";
+}
+<div >
+    <h2>@ViewData["Message"]</h2>
+
+    @using (Html.BeginForm("Create", "Task"))
+    {
+    <div class="col-md-2">
+        <table >
+            <tr>
+                <td>@Html.Label("TaskName")</td>
+                <td>@Html.TextBox("TaskName")</td>
+            </tr>
+            <tr>
+                <td>@Html.Label("TaskDescription")</td>
+                <td>@Html.TextBox("TaskDescription")</td>
+            </tr>
+        </table>
+        <br />
+        <button type="submit" value="Save" title="Save" class="btn btn-primary btn-sm" >Save</button>
+    </div>
+    }
+    <br /><br />
+    <div class="col-md-2">      
+    @if (ViewData["Tasks"] != null)
+    {
+        <table>
+            <tr>
+                <th>Action</th>
+                <th>Description</th>
+                <th>Complete</th>
+                <th>Related Id</th>
+            </tr>
+            @foreach (var item in ViewData["Tasks"] as List<ToDo.MVC.ToDoService.ToDoItemContract>)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Title, "Details", "Task", null, null, "", new { id = item.Id }, null)
+                    </td>
+                    <td>@item.Description</td>
+                    <td>@Html.CheckBox("complete", item.Complete, new { disabled = true })</td>
+                    <td>@item.RelatedId</td>
+                </tr>
+            }
+        </table>
+    }
+    </div>
+</div>

@@ -50,6 +50,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ToDo.BusinessTier\ToDo.BusinessTier.csproj">
+      <Project>{2D48F787-E191-40EA-B801-11DED5D9C54B}</Project>
+      <Name>ToDo.BusinessTier</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ToDo.Entity\ToDo.Entity.csproj">
       <Project>{553617CC-1EF5-41C9-BAB0-1FCD66235AA8}</Project>
       <Name>ToDo.Entity</Name>

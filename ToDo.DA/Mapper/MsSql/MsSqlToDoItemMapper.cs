@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using ToDo.Entity;
@@ -22,7 +20,6 @@ namespace ToDo.DA.Mapper.MsSql
 
             // instantiate list to populate
             List<IToDoItem> items = new List<IToDoItem>();
-
             // access the database and retrieve data
             using (IDbConnection conn = GetConnection())
             {
@@ -32,7 +29,7 @@ namespace ToDo.DA.Mapper.MsSql
                 // do we have an id filter?
                 if (!string.IsNullOrEmpty(idFilter))
                 {
-                    sql += " where id = '@id'";
+                    sql += " where id = " + idFilter;
                     command.Parameters.Add(new SqlParameter("@id", idFilter));
                 }
 
@@ -49,7 +46,12 @@ namespace ToDo.DA.Mapper.MsSql
                             item.Title = reader.GetString(reader.GetOrdinal("title"));
                             item.Description = reader.GetString(reader.GetOrdinal("description"));
                             item.Complete = reader.GetBoolean(reader.GetOrdinal("complete"));
-                            item.DoRelatedItems.Add(reader.GetGuid(reader.GetOrdinal("id")).ToString(), reader.GetString(reader.GetOrdinal("title")));
+                            //relatedId can be null so catch the exception
+                            try
+                            {
+                                item.RelatedId = reader.GetGuid(reader.GetOrdinal("relatedId")).ToString();
+                            }
+                            catch {}
                             items.Add(item);
                         }
                     }
@@ -69,7 +71,7 @@ namespace ToDo.DA.Mapper.MsSql
 
         public string Insert(IToDoItem toDoItem)
         {
-            string sql = "INSERT INTO ToDoItems (id, title, description, complete) OUTPUT INSERTED.id VALUES (NEWID(), @title, @description, 0)";
+            string sql = "INSERT INTO ToDoItems (id, title, description, complete, relatedId) OUTPUT INSERTED.id VALUES (NEWID(), @title, @description, 0, @relatedId)";
 
             // access the database and retrieve data
             using (IDbConnection conn = GetConnection())
@@ -79,12 +81,14 @@ namespace ToDo.DA.Mapper.MsSql
 
                 IDbDataParameter title = new SqlParameter("@title", toDoItem.Title);
                 IDbDataParameter description = new SqlParameter("@description", toDoItem.Description);
-                IDbDataParameter relatedId = new SqlParameter("@relatedId", toDoItem.RelatedId);
+                IDbDataParameter complete = new SqlParameter("@complete", toDoItem.Complete);
+                IDbDataParameter relatedId = new SqlParameter("@relatedId", DBNull.Value);
 
                 command.Parameters.Add(title);
                 command.Parameters.Add(description);
+                command.Parameters.Add(complete);
                 command.Parameters.Add(relatedId);
-                
+
                 try
                 {
                     conn.Open();
@@ -121,12 +125,17 @@ namespace ToDo.DA.Mapper.MsSql
             {
                 IDbCommand command = conn.CreateCommand();
                 command.CommandText = sql;
-
+                IDbDataParameter relatedId = null;
                 IDbDataParameter title = new SqlParameter("@title", toDoItem.Title);
                 IDbDataParameter description = new SqlParameter("@description", toDoItem.Description);
                 IDbDataParameter complete = new SqlParameter("@complete", toDoItem.Complete);
                 IDbDataParameter id = new SqlParameter("@id", toDoItem.Id);
-                IDbDataParameter relatedId = new SqlParameter("@relatedId", toDoItem.RelatedId);
+                
+                //if RelatedId is empty then null it
+                if (string.IsNullOrEmpty(toDoItem.RelatedId))
+                    relatedId = new SqlParameter("@relatedId", DBNull.Value);
+                else
+                    relatedId = new SqlParameter("@relatedId", toDoItem.RelatedId);
 
                 command.Parameters.Add(title);
                 command.Parameters.Add(description);

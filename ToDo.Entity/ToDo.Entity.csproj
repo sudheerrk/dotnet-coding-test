@@ -44,6 +44,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToDoItem.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ToDo.BusinessTier\ToDo.BusinessTier.csproj">
+      <Project>{2D48F787-E191-40EA-B801-11DED5D9C54B}</Project>
+      <Name>ToDo.BusinessTier</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -13,7 +13,7 @@ namespace ToDo.WCF
     {
         // list all to do items
         [OperationContract]
-        IEnumerable<Contract.ToDoItemContract> GetToDoItems(string idFilter);
+        IList<Contract.ToDoItemContract> GetToDoItems(string idFilter);
 
         [OperationContract]
         string SaveToDoItem(Contract.ToDoItemContract toDoItem);

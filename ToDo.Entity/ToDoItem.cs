@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using ToDo.BusinessTier.BusinessTier.Abstract;
 
 namespace ToDo.Entity
 {
@@ -12,7 +10,7 @@ namespace ToDo.Entity
         private string _description;
         private bool _complete;
         private string _relatedId;
-        private Dictionary<string, string> DoRelatedItems { get; set; }
+        private List<IRelatedItem> _relatedItems { get; set; }
 
         public string Id
         {
@@ -41,14 +39,14 @@ namespace ToDo.Entity
 
         public string RelatedId
         {
-            get { return _complete; }
-            set { _complete = value; }
+            get { return _relatedId; }
+            set { _relatedId = value; }
         }
 
-        public Dictionary<string, string> DoRelatedItems
+        public List<IRelatedItem> RelatedItems
         {
-            get { return _complete; }
-            set { _complete = value; }
+            get { return _relatedItems; }
+            set { _relatedItems = value; }
         }
     }
 }

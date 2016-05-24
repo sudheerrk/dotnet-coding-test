@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="78bb152d-4833-4370-9b4c-44e62f66d8eb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7ab438fa-1c1a-4eb8-bb12-7edd847cd544" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
     <EnableDataBinding>true</EnableDataBinding>
     <ExcludedTypes />
     <ImportXmlTypes>false</ImportXmlTypes>
@@ -21,11 +22,12 @@
     <MetadataSource Address="http://localhost:13404/ToDoService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ToDoService.disco" MetadataType="Disco" ID="7feb1ec4-bd8f-4061-a21e-de2812d70831" SourceId="1" SourceUrl="http://localhost:13404/ToDoService.svc?disco" />
-    <MetadataFile FileName="ToDoService.wsdl" MetadataType="Wsdl" ID="6437e0c5-4681-4c27-a078-86ab1a7fbce8" SourceId="1" SourceUrl="http://localhost:13404/ToDoService.svc?wsdl" />
-    <MetadataFile FileName="ToDoService.xsd" MetadataType="Schema" ID="ff121a14-14b0-40f2-a8c1-4209c340c15a" SourceId="1" SourceUrl="http://localhost:13404/ToDoService.svc?xsd=xsd1" />
-    <MetadataFile FileName="ToDoService1.xsd" MetadataType="Schema" ID="5dd88176-9a0d-48e2-8ce3-f92d6293e497" SourceId="1" SourceUrl="http://localhost:13404/ToDoService.svc?xsd=xsd0" />
-    <MetadataFile FileName="ToDoService2.xsd" MetadataType="Schema" ID="40e5fd70-6a58-41dc-800f-34ef633cfab0" SourceId="1" SourceUrl="http://localhost:13404/ToDoService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ToDoService.wsdl" MetadataType="Wsdl" ID="d6331c1c-2375-4074-ad51-a135d235bd47" SourceId="1" SourceUrl="http://localhost:13404/ToDoService.svc?wsdl" />
+    <MetadataFile FileName="ToDoService.disco" MetadataType="Disco" ID="ae370507-d0d5-49aa-befe-6ca48ef0c6d0" SourceId="1" SourceUrl="http://localhost:13404/ToDoService.svc?disco" />
+    <MetadataFile FileName="ToDoService.xsd" MetadataType="Schema" ID="2fe6a7df-b0b5-44d0-ac17-80de04a90cd7" SourceId="1" SourceUrl="http://localhost:13404/ToDoService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ToDoService1.xsd" MetadataType="Schema" ID="891c291b-2585-46e5-a162-ce8e330caf5f" SourceId="1" SourceUrl="http://localhost:13404/ToDoService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ToDoService2.xsd" MetadataType="Schema" ID="d0e0170f-a456-47fb-badf-e3eedcfe67ce" SourceId="1" SourceUrl="http://localhost:13404/ToDoService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ToDoService3.xsd" MetadataType="Schema" ID="02fc46ad-5281-43ab-8ecc-fd2f827c5ca0" SourceId="1" SourceUrl="http://localhost:13404/ToDoService.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
 using ToDo.DA.Mapper;
 using ToDo.Entity;
 
@@ -22,7 +19,7 @@ namespace ToDo.Core.Service
             // TODO: Need to sanitise the idFilter string for injection attempts
             return _toDoMapper.GetToDoItems(idFilter);
         }
-
+        
         public string Save(IToDoItem toDoItem)
         {
             if (!string.IsNullOrEmpty(toDoItem.Id))
@@ -62,8 +59,5 @@ namespace ToDo.Core.Service
                 throw ex;
             }
         }
-
-
-
     }
 }

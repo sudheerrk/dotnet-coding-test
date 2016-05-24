@@ -17,6 +17,10 @@ namespace ToDo.MVC.ToDoService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ToDoItemContract", Namespace="http://schemas.datacontract.org/2004/07/ToDo.WCF.Contract")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ToDo.MVC.ToDoService.ToDoItemContract[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ToDo.MVC.ToDoService.RelatedItemContract[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ToDo.MVC.ToDoService.RelatedItemContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(object[]))]
     public partial class ToDoItemContract : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -30,6 +34,12 @@ namespace ToDo.MVC.ToDoService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RelatedIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private object[] RelatedItemsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TitleField;
@@ -84,6 +94,32 @@ namespace ToDo.MVC.ToDoService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RelatedId {
+            get {
+                return this.RelatedIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RelatedIdField, value) != true)) {
+                    this.RelatedIdField = value;
+                    this.RaisePropertyChanged("RelatedId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public object[] RelatedItems {
+            get {
+                return this.RelatedItemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RelatedItemsField, value) != true)) {
+                    this.RelatedItemsField = value;
+                    this.RaisePropertyChanged("RelatedItems");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Title {
             get {
                 return this.TitleField;
@@ -106,6 +142,55 @@ namespace ToDo.MVC.ToDoService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RelatedItemContract", Namespace="http://schemas.datacontract.org/2004/07/ToDo.WCF.Contract")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ToDo.MVC.ToDoService.ToDoItemContract[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ToDo.MVC.ToDoService.ToDoItemContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ToDo.MVC.ToDoService.RelatedItemContract[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(object[]))]
+    public partial class RelatedItemContract : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private object[] RelatedItemsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public object[] RelatedItems {
+            get {
+                return this.RelatedItemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RelatedItemsField, value) != true)) {
+                    this.RelatedItemsField = value;
+                    this.RaisePropertyChanged("RelatedItems");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ToDoService.IToDoService")]
     public interface IToDoService {
@@ -113,8 +198,20 @@ namespace ToDo.MVC.ToDoService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IToDoService/GetToDoItems", ReplyAction="http://tempuri.org/IToDoService/GetToDoItemsResponse")]
         ToDo.MVC.ToDoService.ToDoItemContract[] GetToDoItems(string idFilter);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IToDoService/GetToDoItems", ReplyAction="http://tempuri.org/IToDoService/GetToDoItemsResponse")]
+        System.Threading.Tasks.Task<ToDo.MVC.ToDoService.ToDoItemContract[]> GetToDoItemsAsync(string idFilter);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IToDoService/GetRelatedItems", ReplyAction="http://tempuri.org/IToDoService/GetRelatedItemsResponse")]
+        ToDo.MVC.ToDoService.RelatedItemContract[] GetRelatedItems(string idFilter);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IToDoService/GetRelatedItems", ReplyAction="http://tempuri.org/IToDoService/GetRelatedItemsResponse")]
+        System.Threading.Tasks.Task<ToDo.MVC.ToDoService.RelatedItemContract[]> GetRelatedItemsAsync(string idFilter);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IToDoService/SaveToDoItem", ReplyAction="http://tempuri.org/IToDoService/SaveToDoItemResponse")]
         string SaveToDoItem(ToDo.MVC.ToDoService.ToDoItemContract toDoItem);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IToDoService/SaveToDoItem", ReplyAction="http://tempuri.org/IToDoService/SaveToDoItemResponse")]
+        System.Threading.Tasks.Task<string> SaveToDoItemAsync(ToDo.MVC.ToDoService.ToDoItemContract toDoItem);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -148,8 +245,24 @@ namespace ToDo.MVC.ToDoService {
             return base.Channel.GetToDoItems(idFilter);
         }
         
+        public System.Threading.Tasks.Task<ToDo.MVC.ToDoService.ToDoItemContract[]> GetToDoItemsAsync(string idFilter) {
+            return base.Channel.GetToDoItemsAsync(idFilter);
+        }
+        
+        public ToDo.MVC.ToDoService.RelatedItemContract[] GetRelatedItems(string idFilter) {
+            return base.Channel.GetRelatedItems(idFilter);
+        }
+        
+        public System.Threading.Tasks.Task<ToDo.MVC.ToDoService.RelatedItemContract[]> GetRelatedItemsAsync(string idFilter) {
+            return base.Channel.GetRelatedItemsAsync(idFilter);
+        }
+        
         public string SaveToDoItem(ToDo.MVC.ToDoService.ToDoItemContract toDoItem) {
             return base.Channel.SaveToDoItem(toDoItem);
+        }
+        
+        public System.Threading.Tasks.Task<string> SaveToDoItemAsync(ToDo.MVC.ToDoService.ToDoItemContract toDoItem) {
+            return base.Channel.SaveToDoItemAsync(toDoItem);
         }
     }
 }
