@@ -24,5 +24,9 @@ namespace ToDo.WCF.Contract
         [DataMember]
         public bool Complete
         { get; set; }
+
+        [DataMember]
+        public string pid
+        { get; set; }
     }
 }

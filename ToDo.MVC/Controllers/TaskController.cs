@@ -65,6 +65,12 @@ namespace ToDo.MVC.Controllers
  
         public ActionResult Edit(string id)
         {
+            ToDoService.ToDoServiceClient service = new ToDoService.ToDoServiceClient();
+            List<ToDoService.ToDoItemContract> tasks = new List<ToDoService.ToDoItemContract>();
+            tasks = service.GetToDoItems("").ToList();
+
+            ViewData["Tasks"] = tasks;
+
             return View();
         }
 
@@ -87,7 +93,7 @@ namespace ToDo.MVC.Controllers
                 string complete = collection.Get("Complete").Split(',')[0];
 
                 task.Complete = Convert.ToBoolean(complete);
-
+                task.pid = collection.Get("pid");
                 service.SaveToDoItem(task);
  
                 return RedirectToAction("Index", "Home");

@@ -18,7 +18,10 @@
     <p>
         <%=Html.CheckBoxFor(x => Model.Complete) %>
     </p>
-
+    <p>
+        <%= Html.DropDownListFor(n => n.pid,
+                                                 new SelectList((List<ToDo.MVC.ToDoService.ToDoItemContract>)ViewData["Tasks"], "ColorId", "Name"))%>
+    </p>
     <p>
         <input type="submit" value="Save" />
     </p>

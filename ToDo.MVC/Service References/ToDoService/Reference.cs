@@ -34,6 +34,9 @@ namespace ToDo.MVC.ToDoService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TitleField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string pidField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -92,6 +95,19 @@ namespace ToDo.MVC.ToDoService {
                 if ((object.ReferenceEquals(this.TitleField, value) != true)) {
                     this.TitleField = value;
                     this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string pid {
+            get {
+                return this.pidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.pidField, value) != true)) {
+                    this.pidField = value;
+                    this.RaisePropertyChanged("pid");
                 }
             }
         }

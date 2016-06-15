@@ -11,7 +11,7 @@ namespace ToDo.Entity
         private string _title;
         private string _description;
         private bool _complete;
-
+        private string _pid;
         
 
         public string Id
@@ -36,6 +36,19 @@ namespace ToDo.Entity
         {
             get { return _complete; }
             set { _complete = value; }
+        }
+
+
+        public string Pid
+        {
+            get
+            {
+                return _pid;
+            }
+            set
+            {
+                _pid = value;
+            }
         }
     }
 }

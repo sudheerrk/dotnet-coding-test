@@ -111,7 +111,8 @@ namespace ToDo.DA.Mapper.MsSql
                             SET title = @title
                             , description = @description
                             , complete = @complete
-                            WHERE id = @ids";
+                            , pid = @pid
+                            WHERE id = @id";
 
             // access the database and retrieve data
             using (IDbConnection conn = GetConnection())
@@ -123,11 +124,13 @@ namespace ToDo.DA.Mapper.MsSql
                 IDbDataParameter description = new SqlParameter("@description", toDoItem.Description);
                 IDbDataParameter complete = new SqlParameter("@complete", toDoItem.Complete);
                 IDbDataParameter id = new SqlParameter("@id", toDoItem.Id);
+                IDbDataParameter pid = new SqlParameter("@pid", toDoItem.Pid);
 
                 command.Parameters.Add(title);
                 command.Parameters.Add(description);
                 command.Parameters.Add(complete);
                 command.Parameters.Add(id);
+                command.Parameters.Add(pid);
 
                 try
                 {
