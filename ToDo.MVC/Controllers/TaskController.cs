@@ -16,6 +16,11 @@ namespace ToDo.MVC.Controllers
             return View();
         }
 
+        public ActionResult FullList()
+        {
+            return View();
+        }
+
         //
         // GET: /Task/Details/5
 
@@ -33,7 +38,7 @@ namespace ToDo.MVC.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         } 
 
         //

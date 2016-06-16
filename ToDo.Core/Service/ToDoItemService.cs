@@ -26,9 +26,8 @@ namespace ToDo.Core.Service
         public string Save(IToDoItem toDoItem)
         {
             if (!string.IsNullOrEmpty(toDoItem.Id))
-            {
-                // TODO implement update
-                return "";
+            {   
+                return Update(toDoItem);
             }
             else
             {
